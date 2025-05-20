@@ -16,7 +16,7 @@ locals {
     # Code owner
     CodeOwner = "jvaton"
   }
-  bucket_name = "codebase-${random_integer.bucket_suffix.result}"
+  bucket_name = "codebase-${var.ENV}-${random_integer.bucket_suffix.result}"
 }
 
 resource "random_integer" "bucket_suffix" {
