@@ -1,0 +1,5 @@
+ENV          = "dev"
+ACCOUNT_ID   = "443370681400"
+AWS_REGION   = "eu-west-3"
+PROJECT_NAME = "terraform-aws-codebase"
+BRANCH_NAME  = "master"

@@ -1,0 +1,195 @@
+<!-- BEGIN_TF_DOCS -->
+== Requirements
+
+No requirements.
+
+== Providers
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[provider_aws]] <<provider_aws,aws>> |5.97.0
+|[[provider_terraform]] <<provider_terraform,terraform>> |n/a
+|===
+
+== Modules
+
+[cols="a,a,a",options="header,autowidth"]
+|===
+|Name |Source |Version
+|[[module_opensearch_noprod]] <<module_opensearch_noprod,opensearch_noprod>> |./modules/opensearch |
+|[[module_opensearch_prod]] <<module_opensearch_prod,opensearch_prod>> |./modules/opensearch |
+|===
+
+== Resources
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Type
+|https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones[aws_availability_zones.available] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity[aws_caller_identity.current] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region[aws_region.current] |data source
+|https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state[terraform_remote_state.networks] |data source
+|===
+
+== Inputs
+
+[cols="a,a,a,a,a",options="header,autowidth"]
+|===
+|Name |Description |Type |Default |Required
+|[[input_ACCOUNT_ID]] <<input_ACCOUNT_ID,ACCOUNT_ID>>
+|AWS Account ID
+|`string`
+|n/a
+|yes
+
+|[[input_AWS_REGION]] <<input_AWS_REGION,AWS_REGION>>
+|AWS Region target by default
+|`string`
+|n/a
+|yes
+
+|[[input_BRANCH_NAME]] <<input_BRANCH_NAME,BRANCH_NAME>>
+|Github branch where resources come from
+|`string`
+|n/a
+|yes
+
+|[[input_ENV]] <<input_ENV,ENV>>
+|Environnement
+|`string`
+|n/a
+|yes
+
+|[[input_PROJECT_NAME]] <<input_PROJECT_NAME,PROJECT_NAME>>
+|Name of project
+|`string`
+|n/a
+|yes
+
+|[[input_PROJECT_URL]] <<input_PROJECT_URL,PROJECT_URL>>
+|Github repos URL
+|`string`
+|`"https://github.com/yseop/terraform-aws-opensearch"`
+|no
+
+|[[input_backend_shortname]] <<input_backend_shortname,backend_shortname>>
+|backend shortname
+|`string`
+|n/a
+|yes
+
+|[[input_environment]] <<input_environment,environment>>
+|environment name
+|`string`
+|n/a
+|yes
+
+|[[input_environment_letter]] <<input_environment_letter,environment_letter>>
+|environment letter
+|`string`
+|n/a
+|yes
+
+|[[input_environment_map]] <<input_environment_map,environment_map>>
+|environment map
+|`map(string)`
+|
+
+[source]
+----
+{
+  "dev": "d",
+  "prod": "p",
+  "staging": "s"
+}
+----
+
+|no
+
+|[[input_opensearch]] <<input_opensearch,opensearch>>
+|variables for opensearch clusters
+|
+
+[source]
+----
+map(map(object({
+    engine_version          = string
+    availability_zone_count = number
+    master = object({
+      instance_type  = string
+      instance_count = number
+    })
+    secret_manager_name = string
+    nodes = object({
+      instance_type  = string
+      instance_count = number
+    })
+    network = object({
+      name                     = string
+      allow_security_group_ids = list(string)
+    })
+    volume = object({
+      type = string
+      iops = number
+      size = number
+    })
+    off_peak_window_hour = number
+  })))
+----
+
+|n/a
+|yes
+
+|[[input_region]] <<input_region,region>>
+|The AWS region to deploy to
+|`string`
+|n/a
+|yes
+
+|[[input_region_map]] <<input_region_map,region_map>>
+|region map
+|`map(string)`
+|
+
+[source]
+----
+{
+  "eu-central-1": "euc1",
+  "eu-west-3": "euw3",
+  "us-east-1": "use1"
+}
+----
+
+|no
+
+|[[input_timezone]] <<input_timezone,timezone>>
+|timezone for the schedule
+|`map(string)`
+|
+
+[source]
+----
+{
+  "eu-central-1": "Europe/Paris",
+  "eu-west-3": "Europe/Paris",
+  "us-east-1": "Europe/Paris"
+}
+----
+
+|no
+
+|===
+
+== Outputs
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Description
+|[[output_opensearch_noprod_domain_arns]] <<output_opensearch_noprod_domain_arns,opensearch_noprod_domain_arns>> |ARNs des domaines OpenSearch pour les environnements no-prod
+|[[output_opensearch_noprod_domain_endpoints]] <<output_opensearch_noprod_domain_endpoints,opensearch_noprod_domain_endpoints>> |Endpoints des domaines OpenSearch pour les environnements no-prod
+|[[output_opensearch_noprod_domain_names]] <<output_opensearch_noprod_domain_names,opensearch_noprod_domain_names>> |Noms des domaines OpenSearch pour les environnements no-prod
+|[[output_opensearch_noprod_passwords]] <<output_opensearch_noprod_passwords,opensearch_noprod_passwords>> |Mots de passe des domaines OpenSearch pour les environnements no-prod
+|[[output_opensearch_noprod_s3_bucket_ids]] <<output_opensearch_noprod_s3_bucket_ids,opensearch_noprod_s3_bucket_ids>> |IDs des buckets S3 pour les environnements no-prod
+|===
+<!-- END_TF_DOCS -->

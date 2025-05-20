@@ -1,0 +1,17 @@
+compact: false
+quiet: false
+skip-check:
+  - CKV_AWS_116 # "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+  - CKV_AWS_117 # "Ensure that AWS Lambda function is configured inside a VPC"
+  - CKV_AWS_137 # "Ensure that Elasticsearch is configured inside a VPC"
+  - CKV_AWS_158 # "Ensure that CloudWatch Log Group is encrypted by KMS"
+  - CKV_AWS_173 # "Check encryption settings for Lambda environmental variable"
+  - CKV_AWS_228 # "Verify Elasticsearch domain is using an up to date TLS policy"
+  - CKV_AWS_248 # "Ensure that Elasticsearch is not using the default Security Group"
+  - CKV_AWS_290 # "Ensure IAM policies does not allow write access without constraints"
+  - CKV_AWS_297 # "Ensure EventBridge Scheduler Schedule uses Customer Managed Key (CMK)"
+  - CKV_AWS_317 # "Ensure Elasticsearch Domain Audit Logging is enabled"
+  - CKV_AWS_338 # "Ensure CloudWatch log groups retains logs for at least 1 year"
+  - CKV_AWS_355 # "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+  - CKV_AWS_382 # "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+  - CKV_SECRET_6 # "Base64 High Entropy String"
